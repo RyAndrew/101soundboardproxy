@@ -1,0 +1,5 @@
+
+Options +SymLinksIfOwnerMatch
+RewriteEngine On
+RewriteBase /
+RewriteRule .* proxy101.php [L]
