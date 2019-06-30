@@ -36,12 +36,18 @@ foreach($headersLines as $header){
 if(isset($headersArray['CONTENT-TYPE'])){
 	header('Content-Type: '.$headersArray['CONTENT-TYPE']);
 }
-//|| (isset($headersArray['CONTENT-TYPE']) && substr($headersArray['CONTENT-TYPE'],0,9) === 'text/html')
-if($_SERVER['REQUEST_URI'] === '/' ){
+//
+if($_SERVER['REQUEST_URI'] === '/' || (isset($headersArray['CONTENT-TYPE']) && substr($headersArray['CONTENT-TYPE'],0,9) === 'text/html') ){
 
-	$body = str_ireplace('<img src="/img/101soundsboards-logo.svg" width="303" height="50" alt="101soundboards.com" />','101fartboards.com', $body);
-	$body = str_ireplace('101soundboards','101fartboards', $body);
+	$body = str_replace('<img src="/img/101soundsboards-logo.svg" width="303" height="50" alt="101soundboards.com" />','101fartboards.com', $body);
+	//$body = str_ireplace('101soundboards','101fartboards', $body);
 	$body = str_ireplace(' sound',' fart', $body);
+
+	$body = str_ireplace(', fart)',', sound)', $body);
+	$body = str_ireplace('fart.board','sound.board', $body);
+	$body = str_ireplace('fart.id','sound.id', $body);
+	
+	
 }
 
 echo $body;
