@@ -1,14 +1,20 @@
 <?php 
-// create curl resource 
+
+if($_SERVER['REMOTE_ADDR'] !== 'jonsiphere' && !(isset($_SERVER['HTTP_REFERER']) && FALSE !== stripos($_SERVER['HTTP_REFERER'],'discord')) ){
+	if(!isset($_COOKIE['joke'])){	
+		header("Location: https://www.101soundboards.com/");
+		exit;	
+	}
+}
+setcookie('joke',1,time()+60*60*24*365,'/');
+
 $ch = curl_init(); 
 
-// set url 
 curl_setopt($ch, CURLOPT_URL, "https://www.101soundboards.com" . $_SERVER['REQUEST_URI']); 
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 curl_setopt($ch, CURLOPT_HEADER, 1);
 
-// $output contains the output string 
 if(FALSE === $response = curl_exec($ch)){
 	die("fart");
 }
