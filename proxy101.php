@@ -8,6 +8,12 @@ if($_SERVER['REMOTE_ADDR'] !== 'jonsiphere' && !(isset($_SERVER['HTTP_REFERER'])
 }
 setcookie('joke',1,time()+60*60*24*365,'/');
 
+if(	FALSE !== stripos($_SERVER['REQUEST_URI'],'.mp3') ){
+	header("Content-Type: audio/mpeg");
+	readfile('fart.mp3');
+	exit;
+}
+
 $ch = curl_init("https://www.101soundboards.com" . $_SERVER['REQUEST_URI']); 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 curl_setopt($ch, CURLOPT_HEADER, 1);
